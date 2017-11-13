@@ -25,8 +25,8 @@
 /// Loads an animation from a specific file path. WARNING Do not use a web URL for file path.
 + (nullable instancetype)animationWithFilePath:(nonnull NSString *)filePath NS_SWIFT_NAME(init(filePath:));
 
-+ (nonnull instancetype)animationWithFilePath:(nonnull NSString *)filePath
-								rootDirectory: (nullable NSString *) rootDirectory NS_SWIFT_NAME(init(filePath:root:));
++ (nullable instancetype)animationWithFilePath:(nonnull NSString *)filePath
+								assetPaths: (nullable NSDictionary *) assetPaths NS_SWIFT_NAME(init(filePath:assetPaths:));
 
 /// Creates an animation from the deserialized JSON Dictionary
 + (nonnull instancetype)animationFromJSON:(nonnull NSDictionary *)animationJSON NS_SWIFT_NAME(init(json:));
@@ -49,5 +49,6 @@
 @property (nonatomic, readwrite, nullable) NSString *rootDirectory;
 @property (nonatomic, readonly, nullable) NSBundle *assetBundle;
 @property (nonatomic, copy, nullable) NSString *cacheKey;
+@property (nonatomic, readwrite, nullable) NSDictionary *assetPaths;
 
 @end

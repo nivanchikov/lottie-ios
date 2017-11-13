@@ -126,23 +126,25 @@
 - (void)_setImageForAsset:(LOTAsset *)asset {
   if (asset.imageName) {
     UIImage *image;
-    if (asset.rootDirectory.length > 0) {
-      NSString *rootDirectory  = asset.rootDirectory;
-      if (asset.imageDirectory.length > 0) {
-        rootDirectory = [rootDirectory stringByAppendingPathComponent:asset.imageDirectory];
-      }
-      NSString *imagePath = [rootDirectory stringByAppendingPathComponent:asset.imageName];
-        
-      id<LOTImageCache> imageCache = [LOTCacheProvider imageCache];
-      if (imageCache) {
-        image = [imageCache imageForKey:imagePath];
-        if (!image) {
-          image = [UIImage imageWithContentsOfFile:imagePath];
-          [imageCache setImage:image forKey:imagePath];
-        }
-      } else {
-        image = [UIImage imageWithContentsOfFile:imagePath];
-      }
+	  if ([asset.filePath length] > 0) {
+		  image = [UIImage imageWithContentsOfFile: asset.filePath];
+	  } else if (asset.rootDirectory.length > 0) {
+		  NSString *rootDirectory  = asset.rootDirectory;
+		  if (asset.imageDirectory.length > 0) {
+			rootDirectory = [rootDirectory stringByAppendingPathComponent:asset.imageDirectory];
+		  }
+		  NSString *imagePath = [rootDirectory stringByAppendingPathComponent:asset.imageName];
+			
+		  id<LOTImageCache> imageCache = [LOTCacheProvider imageCache];
+		  if (imageCache) {
+			image = [imageCache imageForKey:imagePath];
+			if (!image) {
+			  image = [UIImage imageWithContentsOfFile:imagePath];
+			  [imageCache setImage:image forKey:imagePath];
+			}
+		  } else {
+			image = [UIImage imageWithContentsOfFile:imagePath];
+		  }
     } else {
       NSArray *components = [asset.imageName componentsSeparatedByString:@"."];
       image = [UIImage imageNamed:components.firstObject inBundle:asset.assetBundle compatibleWithTraitCollection:nil];

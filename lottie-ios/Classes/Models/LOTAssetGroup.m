@@ -64,4 +64,16 @@
         obj.rootDirectory = rootDirectory;
     }];
 }
+
+-(void)setAssetPaths:(NSDictionary *)assetPaths
+{
+	_assetPaths = assetPaths;
+	[_assetMap enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, LOTAsset * _Nonnull obj, BOOL * _Nonnull stop)
+	{
+		if (obj.referenceID) {
+			obj.filePath = assetPaths[obj.referenceID];
+		}
+	}];
+}
+
 @end

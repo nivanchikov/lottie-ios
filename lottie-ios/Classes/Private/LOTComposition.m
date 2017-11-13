@@ -45,11 +45,12 @@
 }
 
 + (instancetype)animationWithFilePath:(NSString *)filePath {
-	return [self animationWithFilePath: filePath rootDirectory: nil];
+	return [self animationWithFilePath: filePath assetPaths: nil];
 }
 
 + (nullable instancetype)animationWithFilePath:(nonnull NSString *)filePath
-								 rootDirectory:(nullable NSString *)rootDirectory {
+									assetPaths: (nullable NSDictionary *) assetPaths
+{
   NSString *animationName = filePath;
   
   LOTComposition *comp = [[LOTAnimationCache sharedCache] animationForKey:animationName];
@@ -63,10 +64,8 @@
                                                                          options:0 error:&error] : nil;
   if (JSONObject && !error) {
     LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject withAssetBundle:[NSBundle mainBundle]];
-	  if (![rootDirectory length]) {
-		  rootDirectory = [filePath stringByDeletingLastPathComponent];
-	  }
-    laScene.rootDirectory = rootDirectory;
+    laScene.rootDirectory = [filePath stringByDeletingLastPathComponent];
+	  laScene.assetPaths = assetPaths;
     [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:animationName];
     laScene.cacheKey = animationName;
     return laScene;
@@ -136,6 +135,11 @@
 - (void)setRootDirectory:(NSString *)rootDirectory {
     _rootDirectory = rootDirectory;
     self.assetGroup.rootDirectory = rootDirectory;
+}
+
+- (void)setAssetPaths:(NSDictionary *)assetPaths {
+	_assetPaths = assetPaths;
+	self.assetGroup.assetPaths = assetPaths;
 }
   
 @end

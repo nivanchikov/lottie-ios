@@ -14,6 +14,7 @@
 @interface LOTAssetGroup : NSObject
 @property (nonatomic, readwrite) NSString * _Nullable rootDirectory;
 @property (nonatomic, readonly, nullable) NSBundle *assetBundle;
+@property (nonatomic, readwrite, nullable) NSDictionary *assetPaths;
 
 - (instancetype _Nonnull)initWithJSON:(NSArray * _Nonnull)jsonArray
                       withAssetBundle:(NSBundle *_Nullable)bundle;

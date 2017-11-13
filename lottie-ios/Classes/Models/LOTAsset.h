@@ -32,6 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, readwrite) NSString *rootDirectory;
 @property (nonatomic, readonly) NSBundle *assetBundle;
+@property (nonatomic, readwrite, nullable) NSString *filePath;
 @end
 
 NS_ASSUME_NONNULL_END
