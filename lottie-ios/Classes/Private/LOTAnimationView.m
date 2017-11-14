@@ -135,6 +135,17 @@ static NSString * const kCompContainerAnimationKey = @"play";
 
 #endif
 
+- (void) setCurrentFrameHandle:(CGFloat)currentFrameHandle
+{
+	_currentFrameHandle = currentFrameHandle;
+	[CATransaction begin];
+	[CATransaction setDisableActions: YES];
+	_compContainer.currentFrame = @(currentFrameHandle);
+	[_compContainer setNeedsDisplay];
+	[self.layer setNeedsDisplay];
+	[CATransaction commit];
+}
+
 - (void)_commonInit {
   _animationSpeed = 1;
   _animationProgress = 0;

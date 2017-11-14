@@ -14,6 +14,8 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 
 @interface LOTAnimationView : LOTView
 
+@property (nonatomic, assign) CGFloat currentFrameHandle;
+
 /// Load animation by name from the default bundle, Images are also loaded from the bundle
 + (nonnull instancetype)animationNamed:(nonnull NSString *)animationName NS_SWIFT_NAME(init(name:));
 

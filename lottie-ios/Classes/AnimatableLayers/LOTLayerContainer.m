@@ -207,7 +207,20 @@
   return self;
 }
 
-- (void)display {
+
+- (void)setCurrentFrameHandle:(CGFloat)currentFrameHandle
+{
+	_currentFrameHandle = currentFrameHandle;
+	
+	[CATransaction begin];
+	[CATransaction setDisableActions: YES];
+	self.currentFrame = @(currentFrameHandle);
+	[self setNeedsDisplay];
+	[CATransaction commit];
+}
+
+
+- (void)drawInContext:(CGContextRef)ctx {
   LOTLayerContainer *presentation = self;
   if (self.animationKeys.count &&
       self.presentationLayer) {

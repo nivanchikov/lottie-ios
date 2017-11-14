@@ -15,6 +15,7 @@
 - (instancetype _Nonnull)initWithModel:(LOTLayer * _Nullable)layer
                  inLayerGroup:(LOTLayerGroup * _Nullable)layerGroup;
 
+@property (nonatomic, assign) CGFloat currentFrameHandle;
 @property (nonatomic,  readonly, strong, nullable) NSString *layerName;
 @property (nonatomic, nullable) NSNumber *currentFrame;
 @property (nonatomic, assign) CGRect viewportBounds;
